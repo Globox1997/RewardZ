@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "net.rewardz.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"PlayerManagerMixin",
+		"PlayerEntityMixin"
+	],
+	"client": [
+		"client.InventoryScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,11 @@
+{
+    "screen.rewardz": "Rewards",
+
+    "category.rewardz.keybind": "RewardZ Keybinds",
+    "key.rewardz.reward": "Open Reward Screen",
+
+    "text.autoconfig.rewardz.title": "RewardZ Config",
+    "text.autoconfig.rewardz.option.posX": "Pos X",
+    "text.autoconfig.rewardz.option.posY": "Pos Y",
+    "text.autoconfig.rewardz.option.inventoryButton": "Inventory Button"
+}
