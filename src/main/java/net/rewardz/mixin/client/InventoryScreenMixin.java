@@ -39,12 +39,13 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
     protected void drawBackgroundMixin(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo info) {
+        int rewardButtonX = +ConfigInit.CONFIG.posX + (RewardzMain.isPatchouliButtonLoaded ? 23 : 0);
         if (this.isPointWithinBounds(ConfigInit.CONFIG.posX, ConfigInit.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY)) {
-            context.drawTexture(RenderInit.REWARD_ICONS, this.x + ConfigInit.CONFIG.posX + (RewardzMain.isPatchouliButtonLoaded ? 23 : 0), this.y + ConfigInit.CONFIG.posY, 196, 42, 20, 18);
+            context.drawTexture(RenderInit.REWARD_ICONS, this.x + rewardButtonX, this.y + ConfigInit.CONFIG.posY, 196, 42, 20, 18);
             renderCheckMark(context);
             context.drawTooltip(this.textRenderer, Text.translatable("screen.rewardz"), mouseX, mouseY);
         } else {
-            context.drawTexture(RenderInit.REWARD_ICONS, this.x + ConfigInit.CONFIG.posX + (RewardzMain.isPatchouliButtonLoaded ? 23 : 0), this.y + ConfigInit.CONFIG.posY, 176, 42, 20, 18);
+            context.drawTexture(RenderInit.REWARD_ICONS, this.x + rewardButtonX, this.y + ConfigInit.CONFIG.posY, 176, 42, 20, 18);
             renderCheckMark(context);
         }
     }
