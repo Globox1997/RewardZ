@@ -17,10 +17,6 @@ public class PlayerManagerMixin {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     private void onPlayerConnectMixin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo info) {
         RewardsServerPacket.writeS2CSyncRewardsPacket(player.networkHandler);
-        // TEST
-        // ((RewardPlayerAccess) player).setRewardDayCount(4);
-        // ((RewardPlayerAccess) player).setUsedRewardDays(new HashSet<Integer>());
-        // TEST END
         ((RewardPlayerAccess) player).increaseRewardDay();
         RewardsServerPacket.writeS2CSyncRewardDayCountPacket(player);
     }

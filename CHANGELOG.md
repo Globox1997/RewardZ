@@ -1,6 +1,6 @@
 ### Added:
-- 
+- Added reward commands
 ### Fixed:
-- Fixed reward days
+- 
 ### Changed:
 - 
