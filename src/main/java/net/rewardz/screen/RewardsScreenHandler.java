@@ -117,8 +117,8 @@ public class RewardsScreenHandler extends ScreenHandler {
                     continue;
                 }
                 if (RewardzMain.REWARD_MAP.get(RewardHelper.getMonth()).containsKey(i)) {
-                    this.inventory.setStack(i - 1, (ItemStack) RewardzMain.REWARD_MAP.get(RewardHelper.getMonth()).get(i).get(1));
-                } else if (i <= getRewardDayCount(playerInventory.player)) {
+                    this.inventory.setStack(i - 1, ((ItemStack) RewardzMain.REWARD_MAP.get(RewardHelper.getMonth()).get(i).get(1)).copy());
+                } else if (i <= getRewardDayCount(playerInventory.player)) { // might be not good if multiple days are empty in a row
                     ((RewardPlayerAccess) playerInventory.player).addUsedRewardDay(i);
                     RewardsServerPacket.writeS2CSyncRewardDayCountPacket((ServerPlayerEntity) playerInventory.player);
                 }
