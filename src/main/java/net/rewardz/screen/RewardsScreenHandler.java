@@ -58,7 +58,7 @@ public class RewardsScreenHandler extends ScreenHandler {
                             playerInventory.offerOrDrop(stack);
                         }
                         if (!player.getWorld().isClient()) {
-                            RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex());
+                            RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex() + 1);
                         }
                         this.setEnabled(false);
                         super.onTakeItem(player, stack);
@@ -93,7 +93,7 @@ public class RewardsScreenHandler extends ScreenHandler {
                             playerInventory.offerOrDrop(stack);
                         }
                         if (!player.getWorld().isClient()) {
-                            RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex());
+                            RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex() + 1);
                         }
                         this.setEnabled(false);
                         super.onTakeItem(player, stack);
