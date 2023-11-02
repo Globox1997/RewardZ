@@ -40,4 +40,4 @@ replay_*.log
 *.jfr
 
 # other
-test/
+src/main/resources/data/rewardz/rewards/
