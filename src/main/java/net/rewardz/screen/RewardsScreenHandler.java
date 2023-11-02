@@ -54,8 +54,8 @@ public class RewardsScreenHandler extends ScreenHandler {
                     @Override
                     public void onTakeItem(PlayerEntity player, ItemStack stack) {
                         ((RewardPlayerAccess) player).addUsedRewardDay(this.getIndex() + 1);
-                        if (!this.getStack().isEmpty() && !player.getWorld().isClient()) {
-                            playerInventory.offerOrDrop(this.getStack());
+                        if (!stack.isEmpty() && !player.getWorld().isClient()) {
+                            playerInventory.offerOrDrop(stack);
                         }
                         if (!player.getWorld().isClient()) {
                             RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex());
@@ -89,8 +89,8 @@ public class RewardsScreenHandler extends ScreenHandler {
                     @Override
                     public void onTakeItem(PlayerEntity player, ItemStack stack) {
                         ((RewardPlayerAccess) player).addUsedRewardDay(this.getIndex() + 1);
-                        if (!this.getStack().isEmpty() && !player.getWorld().isClient()) {
-                            playerInventory.offerOrDrop(this.getStack());
+                        if (!stack.isEmpty() && !player.getWorld().isClient()) {
+                            playerInventory.offerOrDrop(stack);
                         }
                         if (!player.getWorld().isClient()) {
                             RewardHelper.runRewardCommands((ServerPlayerEntity) player, this.getIndex());
@@ -129,25 +129,11 @@ public class RewardsScreenHandler extends ScreenHandler {
     @Override
     public ItemStack quickMove(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.slots.get(index);
+        Slot slot = this.slots.get(index);
         if (slot != null && slot.hasStack()) {
-            ItemStack itemStack2 = slot.getStack();
-            itemStack = itemStack2.copy();
-
-            if (index < RewardHelper.getDaysOfMonth()) {
-                if (!this.insertItem(itemStack2, 0, RewardHelper.getDaysOfMonth(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            }
-            if (itemStack2.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
-            } else {
-                slot.markDirty();
-            }
-            if (itemStack2.getCount() == itemStack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-            slot.onTakeItem(player, itemStack2);
+            itemStack = slot.getStack();
+            slot.onTakeItem(player, itemStack);
+            return ItemStack.EMPTY;
         }
         return itemStack;
     }
