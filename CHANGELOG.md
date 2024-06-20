@@ -1,7 +1,6 @@
 ### Added:
 - 
 ### Fixed:
-- Fixed double rewards
-- Fixed running commands
-### Changed:
 - 
+### Changed:
+- Updated to mc 1.20.6

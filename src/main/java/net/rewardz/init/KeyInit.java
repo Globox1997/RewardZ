@@ -6,9 +6,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.rewardz.packet.RewardsClientPacket;
+import net.rewardz.network.packet.RewardScreenPacket;
 
 @Environment(EnvType.CLIENT)
 public class KeyInit {
@@ -23,7 +24,7 @@ public class KeyInit {
         // Callback
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (rewardKeyBinding.isPressed()) {
-                RewardsClientPacket.writeC2SRewardsScreenPacket(client);
+                ClientPlayNetworking.send(new RewardScreenPacket());
                 return;
             }
         });

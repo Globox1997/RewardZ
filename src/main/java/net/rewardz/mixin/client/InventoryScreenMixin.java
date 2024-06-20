@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -18,7 +19,7 @@ import net.rewardz.RewardzMain;
 import net.rewardz.access.RewardPlayerAccess;
 import net.rewardz.init.ConfigInit;
 import net.rewardz.init.RenderInit;
-import net.rewardz.packet.RewardsClientPacket;
+import net.rewardz.network.packet.RewardScreenPacket;
 import net.rewardz.util.RewardHelper;
 
 @Environment(EnvType.CLIENT)
@@ -33,7 +34,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     private void mouseClickedMixin(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> info) {
         if (this.client != null && this.focusedSlot == null
                 && this.isPointWithinBounds(ConfigInit.CONFIG.posX + (RenderInit.isPatchouliButtonLoaded ? 23 : 0), ConfigInit.CONFIG.posY, 20, 18, (double) mouseX, (double) mouseY)) {
-            RewardsClientPacket.writeC2SRewardsScreenPacket(client);
+            ClientPlayNetworking.send(new RewardScreenPacket());
         }
     }
 

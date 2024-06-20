@@ -41,7 +41,11 @@ An example for a recipe can be found below:
             "item": {
                 "item": "minecraft:diamond_sword",
                 "count": 3,
-                "nbt": "{Damage:0}"
+                "components": { 
+                    "minecraft:enchantments": {
+                        "minecraft:knockback": 1
+                    }
+                }
             },
             "commands": [
                 "give @s minecraft:apple"

@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Dynamic;
+import com.mojang.serialization.JsonOps;
 
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.component.ComponentChanges;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -58,13 +58,11 @@ public class RewardsDataLoader implements SimpleSynchronousResourceReloadListene
                                 JsonObject jsonItemObject = jsonDayObject.get("item").getAsJsonObject();
                                 ItemStack itemStack = Registries.ITEM.get(new Identifier(jsonItemObject.get("item").getAsString())).getDefaultStack();
                                 itemStack.setCount(jsonItemObject.get("count").getAsInt());
-                                if (jsonItemObject.has("nbt") && !jsonItemObject.get("nbt").isJsonNull()) {
-                                    try {
-                                        NbtCompound nbtCompound = StringNbtReader.parse(jsonItemObject.get("nbt").getAsString());
-                                        itemStack.setNbt(nbtCompound);
-                                    } catch (CommandSyntaxException commandSyntaxException) {
-                                        throw new JsonSyntaxException("Invalid nbt tag: " + commandSyntaxException.getMessage());
-                                    }
+
+                                Optional<ComponentChanges> componentChangesOptional = ComponentChanges.CODEC.parse(new Dynamic<>(JsonOps.INSTANCE, jsonItemObject.get("components"))).result();
+                                if (componentChangesOptional.isPresent()) {
+                                    ComponentChanges componentChanges = componentChangesOptional.get();
+                                    itemStack.applyChanges(componentChanges);
                                 }
                                 dayList.add(itemStack);
                                 if (jsonDayObject.has("tooltip")) {

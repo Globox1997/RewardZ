@@ -28,7 +28,6 @@ public class RewardsScreen extends HandledScreen<RewardsScreenHandler> {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        this.renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
 
         for (int k = 0; k < 5; k++) {

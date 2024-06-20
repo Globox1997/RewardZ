@@ -13,7 +13,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.rewardz.access.RewardPlayerAccess;
-import net.rewardz.packet.RewardsServerPacket;
+import net.rewardz.network.RewardsServerPacket;
 
 public class CommandInit {
 

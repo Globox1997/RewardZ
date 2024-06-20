@@ -2,6 +2,7 @@ package net.rewardz.screen;
 
 import java.util.Set;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -14,7 +15,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.rewardz.RewardzMain;
 import net.rewardz.access.RewardPlayerAccess;
 import net.rewardz.init.ScreenInit;
-import net.rewardz.packet.RewardsServerPacket;
+import net.rewardz.network.packet.RewardSyncDayCountPacket;
 import net.rewardz.screen.widget.RewardSlot;
 import net.rewardz.util.RewardHelper;
 
@@ -120,7 +121,10 @@ public class RewardsScreenHandler extends ScreenHandler {
                     this.inventory.setStack(i - 1, ((ItemStack) RewardzMain.REWARD_MAP.get(RewardHelper.getMonth()).get(i).get(1)).copy());
                 } else if (i <= getRewardDayCount(playerInventory.player)) { // might be not good if multiple days are empty in a row
                     ((RewardPlayerAccess) playerInventory.player).addUsedRewardDay(i);
-                    RewardsServerPacket.writeS2CSyncRewardDayCountPacket((ServerPlayerEntity) playerInventory.player);
+                    if (playerInventory.player instanceof ServerPlayerEntity serverPlayerEntity) {
+                        ServerPlayNetworking.send(serverPlayerEntity, new RewardSyncDayCountPacket(((RewardPlayerAccess) playerInventory.player).getRewardDayCount(),
+                                ((RewardPlayerAccess) playerInventory.player).getUsedRewardDays().stream().toList()));
+                    }
                 }
             }
         }

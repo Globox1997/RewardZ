@@ -9,7 +9,7 @@ import net.rewardz.init.CommandInit;
 import net.rewardz.init.ConfigInit;
 import net.rewardz.init.LoaderInit;
 import net.rewardz.init.ScreenInit;
-import net.rewardz.packet.RewardsServerPacket;
+import net.rewardz.network.RewardsServerPacket;
 
 public class RewardzMain implements ModInitializer {
 
