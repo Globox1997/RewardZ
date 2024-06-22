@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 public record RewardScreenPacket() implements CustomPayload {
 
-    public static final CustomPayload.Id<RewardScreenPacket> PACKET_ID = new CustomPayload.Id<>(new Identifier("rewardz", "reward_screen_packet"));
+    public static final CustomPayload.Id<RewardScreenPacket> PACKET_ID = new CustomPayload.Id<>(Identifier.of("rewardz", "reward_screen_packet"));
 
     public static final PacketCodec<RegistryByteBuf, RewardScreenPacket> PACKET_CODEC = PacketCodec.of((value, buf) -> {
     }, buf -> new RewardScreenPacket());

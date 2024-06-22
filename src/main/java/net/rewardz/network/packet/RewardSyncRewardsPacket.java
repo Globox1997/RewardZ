@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 
 public record RewardSyncRewardsPacket(RewardMonthDatas rewardMonthDatas) implements CustomPayload {
 
-    public static final CustomPayload.Id<RewardSyncRewardsPacket> PACKET_ID = new CustomPayload.Id<>(new Identifier("rewardz", "reward_sync_rewards_packet"));
+    public static final CustomPayload.Id<RewardSyncRewardsPacket> PACKET_ID = new CustomPayload.Id<>(Identifier.of("rewardz", "reward_sync_rewards_packet"));
 
     public static final PacketCodec<RegistryByteBuf, RewardSyncRewardsPacket> PACKET_CODEC = PacketCodec.of(RewardSyncRewardsPacket::write, RewardSyncRewardsPacket::new);
 

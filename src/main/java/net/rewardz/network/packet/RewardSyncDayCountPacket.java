@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 public record RewardSyncDayCountPacket(int rewardDayCount, List<Integer> usedRewardDays) implements CustomPayload {
 
-    public static final CustomPayload.Id<RewardSyncDayCountPacket> PACKET_ID = new CustomPayload.Id<>(new Identifier("rewardz", "reward_sync_day_count_packet"));
+    public static final CustomPayload.Id<RewardSyncDayCountPacket> PACKET_ID = new CustomPayload.Id<>(Identifier.of("rewardz", "reward_sync_day_count_packet"));
 
     public static final PacketCodec<RegistryByteBuf, RewardSyncDayCountPacket> PACKET_CODEC = PacketCodec.of((value, buf) -> {
         buf.writeInt(value.rewardDayCount);

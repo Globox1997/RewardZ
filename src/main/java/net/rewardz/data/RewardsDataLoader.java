@@ -30,7 +30,7 @@ public class RewardsDataLoader implements SimpleSynchronousResourceReloadListene
 
     @Override
     public Identifier getFabricId() {
-        return new Identifier("rewards", "rewards_loader");
+        return Identifier.of("rewards", "rewards_loader");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RewardsDataLoader implements SimpleSynchronousResourceReloadListene
                                 }
                                 dayList.add(exact);
                                 JsonObject jsonItemObject = jsonDayObject.get("item").getAsJsonObject();
-                                ItemStack itemStack = Registries.ITEM.get(new Identifier(jsonItemObject.get("item").getAsString())).getDefaultStack();
+                                ItemStack itemStack = Registries.ITEM.get(Identifier.of(jsonItemObject.get("item").getAsString())).getDefaultStack();
                                 itemStack.setCount(jsonItemObject.get("count").getAsInt());
 
                                 Optional<ComponentChanges> componentChangesOptional = ComponentChanges.CODEC.parse(new Dynamic<>(JsonOps.INSTANCE, jsonItemObject.get("components"))).result();

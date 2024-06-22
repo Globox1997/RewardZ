@@ -13,7 +13,7 @@ public class RenderInit {
 
     public static final boolean isPatchouliButtonLoaded = FabricLoader.getInstance().isModLoaded("patchoulibutton");
 
-    public static final Identifier REWARD_ICONS = new Identifier("rewardz", "textures/gui/rewards.png");
+    public static final Identifier REWARD_ICONS = Identifier.of("rewardz", "textures/gui/rewards.png");
 
     public static void init() {
         HandledScreens.<RewardsScreenHandler, RewardsScreen>register(ScreenInit.REWARDS_SCREEN_HANDLER_TYPE, RewardsScreen::new);
